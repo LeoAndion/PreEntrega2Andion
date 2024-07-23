@@ -1,0 +1,60 @@
+[
+  {
+    "id": "3",
+    "status": true,
+    "Titulo": "ChoriPan",
+    "description": "Comida",
+    "code": "Andion",
+    "price": 180,
+    "stock": 5,
+    "category": "Carrito",
+    "thumbnails": [
+      "",
+      ""
+    ]
+  },
+  {
+    "id": "6",
+    "status": true,
+    "Titulo": "Panchito ",
+    "description": "Nuevo",
+    "code": "2024",
+    "price": 42,
+    "stock": 4524,
+    "category": "Nuevas comidas",
+    "thumbnails": [
+      "/ejempl/imagen",
+      ""
+    ]
+  },
+  {
+    "id": "0.0cg54h1352aaaf",
+    "status": true,
+    "Titulo": " Milanga",
+    "description": "Muy rica",
+    "code": "Andion",
+    "price": "205",
+    "stock": "10",
+    "category": "Nuevo"
+  },
+  {
+    "id": "0.1gcd6gcg10c28f",
+    "status": true,
+    "Titulo": "Pizza",
+    "description": "Muzza",
+    "code": "262626",
+    "price": "368",
+    "stock": "25",
+    "category": "Masa"
+  },
+  {
+    "id": "0.329e34h3ab2a39",
+    "status": true,
+    "Titulo": "Comida",
+    "description": "ComidAa",
+    "code": "2141",
+    "price": "2000",
+    "stock": "10",
+    "category": "Rico"
+  }
+]

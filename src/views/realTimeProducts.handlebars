@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos en Tiempo Real</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="products-container">
+            <h1>Productos en Tiempo Real</h1>
+            {{#each products}}
+            <div class="product">
+                <h2>{{this.Titulo}}</h2>
+                <p>Description: {{this.description}}</p>
+                <p>Code: {{this.code}}</p>
+                <p>Price: {{this.price}}</p>
+                <p>Stock: {{this.stock}}</p>
+                <p>Category: {{this.category}}</p>
+                <button onclick="deleteProduct('{{this.id}}')">Delete</button>
+            </div>
+            {{/each}}
+        </div>
+
+        <div class="form-container">
+            <h2>Añadir Producto Nuevo</h2>
+            <form id="add-product-form">
+                <input type="text" id="Titulo" placeholder="Titulo" required>
+                <input type="text" id="description" placeholder="Description" required>
+                <input type="text" id="code" placeholder="Code" required>
+                <input type="number" id="price" placeholder="Price" required>
+                <input type="number" id="stock" placeholder="Stock" required>
+                <input type="text" id="category" placeholder="Category" required>
+                <button type="submit">Add Product</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        socket.on('updateProducts', (products) => {
+            const productsContainer = document.getElementById('products-container');
+            productsContainer.innerHTML = '';
+
+            products.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'product';
+                productElement.innerHTML = `
+                    <h2>${product.Titulo}</h2>
+                    <p>Description: ${product.description}</p>
+                    <p>Code: ${product.code}</p>
+                    <p>Price: ${product.price}</p>
+                    <p>Stock: ${product.stock}</p>
+                    <p>Category: ${product.category}</p>
+                    <button onclick="deleteProduct('${product.id}')">Delete</button>
+                `;
+                productsContainer.appendChild(productElement);
+            });
+        });
+
+        document.getElementById('add-product-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newProduct = {
+                Titulo: document.getElementById('Titulo').value,
+                description: document.getElementById('description').value,
+                code: document.getElementById('code').value,
+                price: document.getElementById('price').value,
+                stock: document.getElementById('stock').value,
+                category: document.getElementById('category').value
+            };
+            socket.emit('addProduct', newProduct);
+            document.getElementById('add-product-form').reset();
+        });
+
+        function deleteProduct(id) {
+            socket.emit('deleteProduct', id);
+        }
+    </script>
+</body>
+</html>
